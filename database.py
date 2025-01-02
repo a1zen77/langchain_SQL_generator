@@ -1,10 +1,8 @@
 import sqlite3
 
-# Database setup
+#  sqlite database setup
 connection=sqlite3.connect("student.db")
-
-# Create cursor
-cursor=connection.cursor()
+db=connection.cursor()
 
 # Create the table
 create_table_query="""
@@ -17,10 +15,9 @@ CREATE TABLE STUDENTS (
     MINOR VARCHAR(50)
 );
 """
+db.execute(create_table_query)
 
-cursor.execute(create_table_query)
-
-# Insert Records
+# Inserting records into STUDENT table
 sql_query = """INSERT INTO STUDENTS (NAME, SECTION, ROLL_NUMBER, MARKS, MAJOR, MINOR) VALUES (?, ?, ?, ?, ?, ?)"""
 values = [
 ('John Doe', 'A', 101, 85.5, 'Computer Science', 'Mathematics'),
@@ -35,11 +32,11 @@ values = [
 ('Ethan Clark', 'C', 110, 82.5, 'Physics', 'Computer Science')
 ]
 
-cursor.executemany(sql_query, values)
+db.executemany(sql_query, values)
 connection.commit()
 
 # Display the records
-data=cursor.execute("""Select * from STUDENTS""")
+data=db.execute("""Select * from STUDENTS""")
 
 for row in data:
     print(row)

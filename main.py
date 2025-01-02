@@ -1,3 +1,4 @@
+# importing libraries
 import os
 import sqlite3
 import streamlit as st
@@ -7,8 +8,10 @@ from langchain_groq import ChatGroq
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 
+# loading groq-api-key stored in .env file
 load_dotenv()
 
+# fine tuning the LLM to give SQL query
 def get_sql_query(user_query):
     groq_sys_prompt = ChatPromptTemplate.from_template("""
         You are an expert in converting English questions to SQL queries!
@@ -34,13 +37,14 @@ def get_sql_query(user_query):
     response = chain.invoke({"user_query": user_query})
     return response
 
-
+# querying the database
 def return_sql_response(sql_query):
     database = "student.db"
     with sqlite3.connect(database) as conn:
         return conn.execute(sql_query).fetchall()
 
 
+# streamlit interface along with inline html
 def main():
     st.set_page_config(page_title="Text To SQL", layout = "wide")
     st.markdown(
