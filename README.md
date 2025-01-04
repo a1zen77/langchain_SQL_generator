@@ -12,5 +12,7 @@ This is an application that enables interaction with databases through natural l
 
 - **Fine-Tuning**: Used prompt engineering to ensure that to LLM only responds with SQL query, nothing else.
 
+- **Inter-Face**: Developed a Streamlit interface for user input and seamless interaction with the sqlite database.
+
 
 <img width="1388" alt="Screenshot 2025-01-04 at 4 33 40 PM" src="https://github.com/user-attachments/assets/374bdf84-9934-4b08-b2f3-f43aaaaef144" />
